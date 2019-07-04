@@ -1,14 +1,38 @@
 <ion-header>
   <ion-toolbar>
     <ion-title>
-      Ionic Blank
+      Home
     </ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
-  <div class="ion-padding">
-    The world is your oyster.
-    <p>If you get lost, the <a target="_blank" rel="noopener" href="https://ionicframework.com/docs/">docs</a> will be your guide.</p>
+
+  <div style="position: fixed;top: 0; width: 100%;margin-top: 45px;">
+    <ion-searchbar showCancelButton="focus" cancelButtonText="Submit" [(ngModel)]="username" (ionCancel)="onSubmit(username)"></ion-searchbar>
   </div>
+
+
+  <div class="ion-padding" style="margin-top: 56px;" *ngIf="result != undefined">
+    <div style="text-align: right;">
+      <ion-icon name="close-circle" (click)="closeResult()"></ion-icon>
+    </div>
+     <ion-item *ngFor="let uf of result" >
+      <ion-avatar slot="start">
+        <img src="https://gravatar.com/avatar/dba6bae8c566f9d4041fb9cd9ada7741?d=identicon&f=y">
+      </ion-avatar>
+      <ion-label>{{uf.user_name}}</ion-label>
+      <ion-button (click)="addFriend(uf.id)">Add</ion-button>
+    </ion-item>
+  </div>
+
+  <div class="ion-padding" style="margin-top: 56px;" *ngIf="result == undefined">
+     <ion-item *ngFor="let mf of friends" (click)="toChat(mf.id)">
+      <ion-avatar slot="start">
+        <img src="https://gravatar.com/avatar/dba6bae8c566f9d4041fb9cd9ada7741?d=identicon&f=y">
+      </ion-avatar>
+      <ion-label>{{mf.user_name}}</ion-label>
+    </ion-item>
+  </div>
+ 
 </ion-content>

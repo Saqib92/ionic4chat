@@ -1,0 +1,61 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button  defaultHref="home"></ion-back-button>
+    </ion-buttons>
+    <ion-title>chat</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+
+
+<ion-grid>
+    <ion-row *ngFor="let m of messages">
+      
+      <ion-col size="9" style="background-color: skyblue; border-radius: 10px;" *ngIf="m.sender_id != myId">
+<!--         <span class="user_name">Serder:</span><br> -->
+        
+        <span >{{m.text}}</span>
+        <!-- <span ><img [src]="message.file"> image</span> -->
+        <div class="time">{{m.created | date}}</div>
+      </ion-col>
+ 
+      <ion-col offset="3" size="9" style="background-color: aliceblue; border-radius: 10px;"  *ngIf="m.sender_id == myId">
+        <!-- <span class="user_name2">my name:</span><br> -->
+        <span >{{m.text}}</span>
+      <!--   <span ><img [src]="message.file">image</span> -->
+        <div class="time">{{m.created | date}}</div>
+      </ion-col>
+ 
+    </ion-row>
+  </ion-grid>
+
+
+
+
+
+
+</ion-content>
+
+<ion-footer>
+  <ion-toolbar>
+    <ion-row>
+      <ion-col size="8">
+        <ion-item no-lines>
+          <ion-input type="text" placeholder="Message" [(ngModel)]="newMessage"></ion-input>
+        </ion-item>
+      </ion-col>
+      <ion-col size="2" *ngIf="newMessage === ''">
+        <ion-button  fill="outline">
+		  <ion-icon slot="icon-only" name="camera"></ion-icon>
+		</ion-button>
+      </ion-col>
+      <ion-col size="2" class="sendbtn">
+        <ion-button (click)="sendMessage(newMessage)"  fill="outline">
+		  <ion-icon slot="icon-only" name="send"></ion-icon>
+		</ion-button>
+      </ion-col>
+    </ion-row>
+  </ion-toolbar>
+</ion-footer>
